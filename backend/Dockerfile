@@ -5,8 +5,8 @@ ARG NODE_ENV=development
 ENV NODE_ENV=${NODE_ENV}
 
 WORKDIR /opt/
-COPY package.json package-lock.json ./
-RUN npm config set fetch-retry-maxtimeout 600000 -g && npm install
+COPY package.json ./
+RUN npm install
 
 WORKDIR /opt/app
 COPY . .
