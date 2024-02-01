@@ -1,7 +1,4 @@
-############################
 # OS X
-############################
-
 .DS_Store
 .AppleDouble
 .LSOverride
@@ -10,18 +7,10 @@ Icon
 .Trashes
 ._*
 
-
-############################
 # Linux
-############################
-
 *~
 
-
-############################
 # Windows
-############################
-
 Thumbs.db
 ehthumbs.db
 Desktop.ini
@@ -31,11 +20,7 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
-
-############################
 # Packages
-############################
-
 *.7z
 *.csv
 *.dat
@@ -60,33 +45,23 @@ $RECYCLE.BIN/
 *.out
 *.pid
 
-
-############################
 # Logs and databases
-############################
-
 .tmp
 *.log
 *.sql
 *.sqlite
 *.sqlite3
 
-
-############################
 # Misc.
-############################
-
 *#
 ssl
 .idea
 nbproject
 public/uploads/*
 !public/uploads/.gitkeep
+.fleet
 
-############################
 # Node.js
-############################
-
 lib-cov
 lcov.info
 pids
@@ -95,20 +70,26 @@ results
 node_modules
 .node_history
 
-############################
 # Tests
-############################
-
 coverage
 
-############################
 # Strapi
-############################
-
-.env
 license.txt
 exports
 .strapi
 dist
 build
 .strapi-updater.json
+
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+
+# Local env files
+.env
+.env.*
+!.env.example

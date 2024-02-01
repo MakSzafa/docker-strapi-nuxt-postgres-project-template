@@ -23,14 +23,30 @@ services:
     ports:
       - '1337:1337'
 
-      
+  frontend:
+    container_name: local_frontend
+    build:  
+      context: ./frontend
+      dockerfile: Dockerfile
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - ./frontend/nginx:/etc/nginx/conf.d
+    restart: always
+    env_file: .env
+    ports:
+      - 8080:8080
+    environment: 
+      - CHOKIDAR_USEPOLLING=true
+
   postgres:
     image: postgres:14.5-alpine
     container_name: local_db
     platform: linux/amd64 #for platform error on Apple M1 chips
     volumes:
-      - template_data:/var/lib/postgresql/data/ #using a volume
-      #- ./data:/var/lib/postgresql/data/ # if you want to use a bind folder
+      - template_data:/var/lib/postgresql/data/
     restart: always
     env_file: .env
     ports:
