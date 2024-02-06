@@ -1,57 +1,60 @@
-# 🚀 Getting started with Strapi
+# 🚀 This is my nuxt-strapi-postgres-nginx-docker project template
 
-Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
+This template is designed to develop application on Windows and deploy it on VPS using Docker.
 
-### `develop`
+Before you start, check your Docker version with `docker -v`.
+You can install it from official site: [Docker](https://docs.docker.com/get-docker/)
 
-Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
+## Table of contents
 
-```
-npm run develop
-# or
-yarn develop
-```
+- [Tech stack](#tech-stack)
+- [Deploy to production](#deploy-to-production)
+- [Important commands](#important-commands)
 
-### `start`
+## Tech stack
 
-Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
+### Back-end
 
-```
-npm run start
-# or
-yarn start
-```
+- [Strapi](https://docs.strapi.io/)
+- [PostgreSQL](https://www.postgresql.org/docs/)
 
-### `build`
+### Front-end
 
-Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
+- [Nuxt.js](https://nuxt.com/docs/getting-started/installation)
+- [Vuetify](https://vuetifyjs.com/en/getting-started/installation/#installation)
 
-```
-npm run build
-# or
-yarn build
-```
+ 
+## Deploy to production
 
-## ⚙️ Deployment
+- backend port has to be updated in:
+    - `/backend/Dockerfile`
+    - `/backend/Dockerfile.prod`
+    - `/nginx/nginx.conf`
+    - `/docker-compose.yml`
+    - `/docker-compose-prod.yml`
+    - `/.env`
+- frontend port has to be updated in:
+    - `/frontend/Dockerfile`
+    - `/frontend/Dockerfile.prod`
+    - `/nginx/nginx.conf`
+    - `/docker-compose.yml`
+    - `/docker-compose-prod.yml`
+    - `/.env`
+- nginx port has to be update it:
+    - `/nginx/nginx.conf`
+    - `/docker-compose.yml`
+    - `/docker-compose-prod.yml`
+-  `/.env` - variables has to be recreated for production mode, change NODE_ENV!
 
-Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
+Run command: `docker compose -f docker-compose-prod.yml up -d --build` to start your production mode and put it in the background
 
-## 📚 Learn more
+## Important commands
 
-- [Resource center](https://strapi.io/resource-center) - Strapi resource center.
-- [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.
-- [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.
-- [Strapi blog](https://strapi.io/blog) - Official Strapi blog containing articles made by the Strapi team and the community.
-- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.
+To build your project use:
+`docker compose up --build` 
 
-Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
+To shut down containers use:
+`docker compose down`
 
-## ✨ Community
-
-- [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
-- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
-- [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
-
----
-
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
+To shut down containers and additionally clear volumes use:
+`docker compose down --volumes`
