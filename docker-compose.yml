@@ -16,7 +16,6 @@ services:
       - ./backend/config:/opt/app/config
       - ./backend/src:/opt/app/src
       - ./backend/package.json:/opt/package.json
-      - ./backend/.env:/opt/app/.env
       - ./backend/public/uploads:/opt/app/public/uploads
     restart: always
     env_file: .env
@@ -30,16 +29,26 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - backend
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-      - ./frontend/nginx:/etc/nginx/conf.d
     restart: always
     env_file: .env
     ports:
-      - 8080:8080
+      - '3000:3000'
     environment: 
+      - PORT=3000
       - CHOKIDAR_USEPOLLING=true
+
+  nginx:
+    container_name: nginx
+    build:  
+      context: ./nginx
+      dockerfile: Dockerfile
+    depends_on:
+      - frontend
+      - backend
+    restart: always
+    env_file: .env   
+    ports:
+      - '8080:8080'
 
   postgres:
     image: postgres:14.5-alpine
